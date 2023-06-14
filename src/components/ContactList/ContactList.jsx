@@ -1,42 +1,51 @@
-import { addContactsThunk, deleteContactsThunk } from '../store/thunk';
-import { useDispatch, useSelector } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
+import { deleteContact, getContacts } from '../../store/operations';
 
-import { ContactMenu, DeleteBtn, ContactsLi } from './ContactList.styled';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-// import Notiflix from 'notiflix';
+import { Dna } from 'react-loader-spinner';
+import {ContactMenu,ContactsLi, DeleteBtn} from './contactList.styled'
 
 export function ContactList() {
-  const { items } = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.contacts.filter);
+
+  const filter = useSelector(state => state.filter);
+  const loader = useSelector(state => state.contacts.isLoading);
 
   useEffect(() => {
-    dispatch(addContactsThunk());
+    dispatch(getContacts());
   }, [dispatch]);
 
-  const onDeletecontact = id => {
-    dispatch(deleteContactsThunk(id));
-  };
-  const filteredContact = items?.filter(contact =>
-    contact?.name?.toLowerCase().includes(filter.toLowerCase())
+  const contacts = useSelector(state => state.contacts.items);
+
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
   );
-  
-   
-  
 
   return (
-    <ContactMenu>
-      {filteredContact.map(({ id, createdAt, name, phone }) => (
-        <ContactsLi key={createdAt}>
-          <p>
-            {' '}
-            {name}:  {phone}
-          </p>
-          <DeleteBtn type="button" onClick={() => onDeletecontact(id)}>
-            Delete
-          </DeleteBtn>
-        </ContactsLi>
-      ))}
-    </ContactMenu>
+    <>
+      <ContactMenu>
+        {filteredContacts.map(contact => (
+          <ContactsLi key={contact?.id}>
+            {contact?.name} <span>{contact?.number} </span>
+            <DeleteBtn onClick={() => dispatch(deleteContact(contact?.id))}>
+              Delete
+            </DeleteBtn>
+          </ContactsLi>
+        ))}
+      </ContactMenu>
+      {loader && (
+        <div>
+          <Dna
+            visible={true}
+            height="160"
+            width="160"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
+          />
+        </div>
+      )}
+    </>
   );
 }

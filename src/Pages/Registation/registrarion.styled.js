@@ -1,8 +1,16 @@
 import styled from '@emotion/styled';
 
+export const RegistrContainer = styled.div`
+  padding: 30px 30px;
+  margin: 0 auto;
+  background-color: #d5e4ea8c;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+`;
 
 
-export const FormInput = styled.input`
+export const RegistrInput = styled.input`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -14,11 +22,11 @@ export const FormInput = styled.input`
   outline: transparent;
 `;
 
-export const AddButton = styled.button`
+export const RegistrButton = styled.button`
   min-width: 120px;
   padding: 10px 10px;
   color: #050919d6;
-  background-color: #0340eda6;
+  background-color: #2ae290f5;
   border-radius: 20px;
   border: transparent;
   outline: transparent;

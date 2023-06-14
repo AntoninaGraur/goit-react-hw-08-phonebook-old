@@ -1,10 +1,6 @@
-import PropTypes from 'prop-types';
-import { ContainerDiv } from './Container.styled';
+import {MainSection} from './container.styled'
 
-export function Container({ children }) { 
-    return <ContainerDiv>{children}</ContainerDiv>;
+
+export function SectionMain({ children }) { 
+    return <MainSection>{children}</MainSection>;
 }
-
-Container.propTypes = {
-    children: PropTypes.node.isRequired
-};
