@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import {FormInput, AddButton} from './formContact.styled'
 
 
-export function ContactForm() {
+function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -76,3 +76,4 @@ export function ContactForm() {
     </form>
   );
 }
+export default ContactForm;

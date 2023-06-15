@@ -1,4 +1,4 @@
-import { ContactForm } from '../components/Form/formContacts';
+import { ContactForm } from '../../components/Form/formContacts';
 import { ContactList } from 'components/ContactList/contactList';
 import { Filter } from 'components/Filter/filter';
 import { SectionMain } from '../../components/Container/container';
