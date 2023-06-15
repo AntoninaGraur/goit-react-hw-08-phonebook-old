@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import PrivateRoute from './Routs/routsPrivate';
 import PublicRoute from './Routs/routsPublick';
+import { Navigate } from 'react-router-dom/dist';
 
 export function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export function App() {
           <Route
             path="/register"
             element={
-              <PublicRoute path="/contacts">
+              <PublicRoute>
                 <RegistrPage />
               </PublicRoute>
             }
@@ -33,7 +34,7 @@ export function App() {
           <Route
             path="/login"
             element={
-              <PublicRoute path="/contacts">
+              <PublicRoute>
                 <LoginPage />
               </PublicRoute>
             }
@@ -41,14 +42,14 @@ export function App() {
           <Route
             path="/contacts"
             element={
-              <PrivateRoute path="/contacts">
-                
+              <PrivateRoute moveto={'/login'}>
                 <PageContacts />
               </PrivateRoute>
             }
           />
         </Route>
+        <Route path="*" element={<Navigate to={'/'} />} />
       </Routes>
     </>
   );
-}
+};
