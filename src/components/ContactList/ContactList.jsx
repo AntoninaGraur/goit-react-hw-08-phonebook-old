@@ -12,9 +12,13 @@ export function ContactList() {
   const filter = useSelector(state => state.filter);
   const loader = useSelector(state => state.contacts.isLoading);
 
+  const exisitingUser = useSelector(state => Boolean(state.auth.user.email));
+
+
   useEffect(() => {
+    if(exisitingUser)
     dispatch(getContacts());
-  }, [dispatch]);
+  }, [dispatch, exisitingUser]);
 
   const contacts = useSelector(state => state.contacts.items);
 
