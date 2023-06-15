@@ -15,8 +15,8 @@ function UserAuthoriz() {
       <Avatar
         src={'https://icons.iconarchive.com/icons/hopstarter/sleek-xp-basic/256/Office-Girl-icon.png'}
         alt="default user"
-        width="55px"
-        height="55px"
+        width="35px"
+        height="35px"
       />
       <p>{userName}</p>
       <LogoutBtn type="button" onClick={handleLogout} >Log out</LogoutBtn>

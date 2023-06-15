@@ -5,7 +5,7 @@ import NavigationLink from '../Navigation/navigation';
 import GlobalNav from '../GlobalNav/globalNav';
 import UserAuthoriz from '../UserAuthoriz/userAuthoriz';
 import { useSelector } from 'react-redux';
-import { HeaderNav } from './layout.styled';
+import { HeaderNav, MainContent } from './layout.styled';
 
 function Layout() {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
@@ -17,9 +17,9 @@ function Layout() {
         {!isLoggedIn && <NavigationLink />}
       </HeaderNav>
 
-      <main>
+      <MainContent>
         <Outlet />
-      </main>
+      </MainContent>
     </>
   );
 }

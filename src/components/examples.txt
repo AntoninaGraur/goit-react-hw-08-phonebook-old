@@ -1,20 +1,21 @@
 import { Route, Routes } from 'react-router-dom';
 
-import Layout from './Layout/layout';
-import RegistrPage from '../Pages/Registation/registation';
-import LoginPage from '../Pages/Login/login';
-import PageContacts from '../Pages/Contacts/contacts';
-import HomePage from '../Pages/Home/home';
-import { authorizatedCurrentUser } from 'store/operations';
+import Layout from './Layout/Layout';
+import RegistrationPage from 'pages/RegistrationPage/RegistrationPage';
+import LogInPage from 'pages/LogInPage/LogInPage';
+import ContactPage from 'pages/ContactPage/ContactPage';
+import HomePage from 'pages/HomePage/HomePage';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import PrivateRoute from './Routs/routsPrivate';
-import PublicRoute from './Routs/routsPublick';
+import { reconnectCurrentUser } from 'store/operations';
+import PrivateRoute from 'components/routes/PrivateRoute';
+import PublicRoute from './routes/PublicRoute';
 
 export function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(authorizatedCurrentUser());
+    dispatch(reconnectCurrentUser());
   }, [dispatch]);
 
   return (
@@ -26,7 +27,7 @@ export function App() {
             path="/register"
             element={
               <PublicRoute path="/contacts">
-                <RegistrPage />
+                <RegistrationPage />
               </PublicRoute>
             }
           />
@@ -34,7 +35,7 @@ export function App() {
             path="/login"
             element={
               <PublicRoute path="/contacts">
-                <LoginPage />
+                <LogInPage />
               </PublicRoute>
             }
           />
@@ -42,8 +43,7 @@ export function App() {
             path="/contacts"
             element={
               <PrivateRoute path="/contacts">
-                
-                <PageContacts />
+                <ContactPage />
               </PrivateRoute>
             }
           />

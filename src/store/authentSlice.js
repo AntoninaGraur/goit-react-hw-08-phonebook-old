@@ -1,11 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, registrUser, logoutUser, authorizatedCurrentUser, } from './operations';
+import {
+  loginUser,
+  registrUser,
+  logoutUser,
+  authorizatedCurrentUser,
+} from './operations';
 
 const initialState = {
   user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
   errorMessage: '',
+  isLoading: false,
 };
 
 const authSlice = createSlice({
@@ -18,36 +24,45 @@ const authSlice = createSlice({
         state.token = payload.token;
         state.isLoggedIn = true;
         state.errorMessage = '';
-      })
-      .addCase(registrUser.rejected, (state, { payload }) => {
-        state.errorMessage = payload;
+        state.isLoading = false;
       })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         state.user = payload.user;
         state.token = payload.token;
         state.isLoggedIn = true;
         state.errorMessage = '';
-      })
-      .addCase(loginUser.rejected, (state, { payload }) => {
-        state.errorMessage = payload;
+        state.isLoading = false;
       })
       .addCase(logoutUser.fulfilled, (state, { payload }) => {
-        state.user = initialState.user;
-        state.token = null;
-        state.isLoggedIn = false;
+        state.user = payload.user;
+        state.token = payload.token;
+        state.isLoggedIn = true;
         state.errorMessage = '';
-      })
-      .addCase(logoutUser.rejected, (state, { payload }) => {
-        state.errorMessage = payload;
+        state.isLoading = false;
       })
       .addCase(authorizatedCurrentUser.fulfilled, (state, { payload }) => {
         state.user = payload;
         state.isLoggedIn = true;
         state.errorMessage = '';
+        state.isLoading = false;
       })
-      .addCase(authorizatedCurrentUser.rejected, (state, { payload }) => {
-        state.errorMessage = payload;
-      });
+      .addMatcher(
+        action => {
+          return action.type.endsWith('/pending');
+        },
+        state => {
+          return { ...state, isLoading: true };
+        }
+      )
+      .addMatcher(
+        action => {
+          return action.type.endsWith('/rejected');
+        },
+        (state, { payload }) => {
+          state.errorMessage = payload;
+          state.isLoading = false;
+        }
+      );
   },
 });
 

@@ -3,15 +3,17 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registrUser } from '../../store/operations';
 
-import { RegistrContainer, RegistrInput, RegistrButton } from './registrarion.styled';
-import { useNavigate } from 'react-router-dom';
+import {
+  RegistrContainer,
+  RegistrInput,
+  RegistrButton,
+} from './registrarion.styled';
 
 function RegistrPage() {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   const errorMessage = useSelector(state => state.auth.errorMessage);
 
@@ -23,13 +25,13 @@ function RegistrPage() {
       email,
       password,
     };
-    dispatch(registrUser(sendedObj)).unwrap().then(() => navigate('/'));
+    dispatch(registrUser(sendedObj));
   };
 
   return (
     <RegistrContainer>
       <h2>Registration page</h2>
-      <form action="" onSubmit={onFormSubmit}>
+      <form onSubmit={onFormSubmit}>
         <label>
           Name
           <RegistrInput
@@ -37,7 +39,7 @@ function RegistrPage() {
             name="name"
             value={name}
             onChange={({ target: { value } }) => setName(value)}
-            autocomplete = "off"
+            autocomplete="off"
           />
         </label>
         <label>
@@ -47,7 +49,7 @@ function RegistrPage() {
             name="email"
             value={email}
             onChange={({ target: { value } }) => setEmail(value)}
-            autocomplete = "off"
+            autocomplete="off"
           />
         </label>
         <label>
@@ -57,10 +59,10 @@ function RegistrPage() {
             name="password"
             value={password}
             onChange={({ target: { value } }) => setPassword(value)}
-            autocomplete = "off"
+            autocomplete="off"
           />
         </label>
-        {errorMessage && <p>No way... You already have this contact in list</p>}
+        {errorMessage && <p>No way... You already have this contact in your list</p>}
         <RegistrButton>Registration</RegistrButton>
       </form>
     </RegistrContainer>

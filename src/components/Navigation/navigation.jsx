@@ -1,15 +1,20 @@
-
-import {RegistrationLoginList, RegistrationLoginItem, RegistrationLoginLink} from './navigation.styled'
+import {
+  RegistrationLoginList,
+  RegistrationLoginItem,
+  RegistrationLoginLink,
+} from './navigation.styled';
 
 function NavigationLink() {
   return (
     <>
       <RegistrationLoginList>
         <RegistrationLoginItem>
-          <RegistrationLoginLink to="/register">Registration</RegistrationLoginLink>
+          <RegistrationLoginLink to="/register">
+            Registration
+          </RegistrationLoginLink>
         </RegistrationLoginItem>
         <RegistrationLoginItem>
-          <RegistrationLoginLink  to="/login">Log in</RegistrationLoginLink>
+          <RegistrationLoginLink to="/login">Log in</RegistrationLoginLink>
         </RegistrationLoginItem>
       </RegistrationLoginList>
     </>

@@ -2,33 +2,33 @@ import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../store/operations';
-import { useNavigate } from 'react-router-dom';
 
-import {LoginContainer, LoginInput, LoginButton} from './login.styled'
+
+import { LoginContainer, LoginInput, LoginButton } from './login.styled';
 
 function LoginPage() {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+ 
 
   const errorMessage = useSelector(state => state.auth.errorMessage);
 
-  const onFormSubmit = evt => {
-    evt.preventDefault();
+  const onFormSubmit = e => {
+    e.preventDefault();
 
     const sendedObj = {
       email,
       password,
     };
-    dispatch(loginUser(sendedObj)).unwrap().then(() => navigate('/'));
+    dispatch(loginUser(sendedObj));
   };
 
   return (
     <LoginContainer>
       <h2>Log in page</h2>
-      <form  onSubmit={onFormSubmit}>
+      <form onSubmit={onFormSubmit}>
         <label>
           Email
           <LoginInput

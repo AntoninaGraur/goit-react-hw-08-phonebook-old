@@ -15,8 +15,8 @@ export function ContactForm() {
   const users = useSelector(state => state.contacts.items);
   const errorFild = useSelector(state => state.contacts.error);
 
-  const onFormSubmit = evt => {
-    evt.preventDefault();
+  const onFormSubmit = e => {
+    e.preventDefault();
 
     const sameName = users.filter(
       user => user.name.toLowerCase() === name.toLowerCase()
@@ -71,7 +71,7 @@ export function ContactForm() {
           value={number}
         />
       </label>
-      {errorFild && <p> Nicht in ordnung</p>}
+      {errorFild && <p> Nicht in ordnung!</p>}
       <AddButton>Add contact</AddButton>
     </form>
   );

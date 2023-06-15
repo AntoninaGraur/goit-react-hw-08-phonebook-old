@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   LoginUserApi,
@@ -11,11 +11,10 @@ import {
 } from '../services/api-users';
 
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com'; 
 
 
 export const getContacts = createAsyncThunk(
-  'contacts/fetchAll',
+  'contacts/getAll',
   async (_, { rejectWithValue }) => {
     try {
       const data = await GetAllContacts();
@@ -77,7 +76,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 export const logoutUser = createAsyncThunk(
-  'auth/logOutUser',
+  'auth/logoutUser',
   async (_, { rejectWithValue }) => {
     try {
       const data = await LogoutUserApi();
