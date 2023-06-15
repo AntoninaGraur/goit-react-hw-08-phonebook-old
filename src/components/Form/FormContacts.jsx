@@ -71,7 +71,7 @@ export function ContactForm() {
           value={number}
         />
       </label>
-      {errorFild && <p> Nicht in ordnung!</p>}
+      {errorFild && <p> Schön im kontaktliste</p>}
       <AddButton>Add contact</AddButton>
     </form>
   );
