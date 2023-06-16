@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../store/operations';
 import { toast } from 'react-toastify';
-import {FormInput, AddButton} from './formContact.styled'
-
+import { FormInput, AddButton } from './formContact.styled';
 
 function ContactForm() {
   const [name, setName] = useState('');
@@ -22,7 +21,7 @@ function ContactForm() {
       user => user.name.toLowerCase() === name.toLowerCase()
     );
     if (sameName.length === 0) {
-      dispatch(addContact({ name, number}));
+      dispatch(addContact({ name, number }));
       resetInputs();
     } else toast.warn(`${name} is already in contacts`);
   };
